@@ -39,17 +39,22 @@
 }
 
 :root {
-  --background: #080808;
-  --foreground: #FDFCF0;
-  --surface: #111111;
-  --card: #0d0d0d;
-  --card-foreground: #FDFCF0;
-  --popover: #0d0d0d;
-  --popover-foreground: #FDFCF0;
-  --accent: #D4AF37;
-  --accent-soft: rgba(212, 175, 55, 0.18);
-  --muted-foreground: rgba(253, 252, 240, 0.55);
-  --border: rgba(253, 252, 240, 0.08);
+  /* Fond crème très doux — respire, premium, naturel */
+  --background: #F7F4EE;
+  --foreground: #1A1814;
+  --surface: #EDE9E1;
+  --card: #EFEBE3;
+  --card-foreground: #1A1814;
+  --popover: #EFEBE3;
+  --popover-foreground: #1A1814;
+  /* Accent or chaud */
+  --accent: #B8923A;
+  --accent-soft: rgba(184, 146, 58, 0.12);
+  /* Vert sauge — touche naturelle premium */
+  --sage: #5C7A5E;
+  --sage-soft: rgba(92, 122, 94, 0.10);
+  --muted-foreground: rgba(26, 24, 20, 0.50);
+  --border: rgba(26, 24, 20, 0.10);
 }
 
 @layer base {
@@ -69,7 +74,7 @@
   }
   ::selection {
     background: var(--accent);
-    color: var(--background);
+    color: #F7F4EE;
   }
 }
 
@@ -82,12 +87,15 @@
   .border-border { border-color: var(--border); }
   .text-muted-foreground { color: var(--muted-foreground); }
   .bg-surface { background-color: var(--surface); }
+  .text-sage { color: var(--sage); }
+  .bg-sage { background-color: var(--sage); }
+  .bg-sage-soft { background-color: var(--sage-soft); }
 }
 
 /* Cinematic aperture entry */
 @keyframes aperture-open {
   0% { clip-path: circle(0% at 50% 50%); filter: blur(20px) brightness(0.4); }
-  60% { filter: blur(4px) brightness(0.8); }
+  60% { filter: blur(4px) brightness(0.9); }
   100% { clip-path: circle(140% at 50% 50%); filter: blur(0) brightness(1); }
 }
 @keyframes aperture-blades {
@@ -103,8 +111,8 @@
   to { transform: scale(1.18); }
 }
 @keyframes light-leak {
-  0%, 100% { opacity: 0.08; }
-  50% { opacity: 0.22; }
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.18; }
 }
 @keyframes shimmer-line {
   from { transform: scaleY(0); transform-origin: top; }
@@ -114,8 +122,8 @@
 .animate-aperture { animation: aperture-open 2.4s var(--ease-cinematic) both; }
 .animate-blades { animation: aperture-blades 1.6s var(--ease-cinematic) 0.2s both; }
 .animate-fade-up { animation: fade-up 1.2s var(--ease-out-expo) both; }
-.animate-ken-burns { animation: ken-burns 18s ease-out both infinite alternate; }
-.animate-leak { animation: light-leak 6s ease-in-out infinite; }
+.animate-ken-burns { animation: ken-burns 20s ease-out both infinite alternate; }
+.animate-leak { animation: light-leak 8s ease-in-out infinite; }
 
 .grain::before {
   content: "";
@@ -123,7 +131,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 100;
-  opacity: 0.04;
-  mix-blend-mode: overlay;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
