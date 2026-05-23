@@ -7,7 +7,7 @@ import { AvantApres } from "@/components/voltra/AvantApres";
 import { Testimonials } from "@/components/voltra/Testimonials";
 import { FinalCta } from "@/components/voltra/FinalCta";
 import { Photographers } from "@/components/voltra/Photographers";
-import { SiteFooter } from "@/components/voltra/SiteFooter";
+import { SiteFooter } from "@/components/voltra/SiteFooter"; 
 
 export const Route = createFileRoute("/")({
   component: Landing,
