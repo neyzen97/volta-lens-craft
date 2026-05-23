@@ -374,12 +374,12 @@ function AuthGate() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
 
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
+  async function handleLogin() {
+    if (!email || !password) { toast.error("Email et mot de passe requis"); return; }
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
-    if (error) toast.error("Identifiants incorrects");
+    if (error) toast.error("Identifiants incorrects : " + error.message);
   }
 
   return (
@@ -401,16 +401,16 @@ function AuthGate() {
           Espace privé.
         </h1>
 
-        <form onSubmit={submit} className="space-y-6">
+        <div className="space-y-6">
           <div>
             <label className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/40 block mb-2">
               Email
             </label>
             <input
               type="email"
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
               className="w-full bg-transparent border-b border-border focus:border-accent outline-none py-3 text-[14px] text-foreground transition-colors"
             />
           </div>
@@ -420,20 +420,21 @@ function AuthGate() {
             </label>
             <input
               type="password"
-              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
               className="w-full bg-transparent border-b border-border focus:border-accent outline-none py-3 text-[14px] text-foreground transition-colors"
             />
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={handleLogin}
             disabled={busy}
             className="w-full py-4 bg-foreground text-background font-mono text-[10px] uppercase tracking-[0.3em] hover:bg-accent transition-colors disabled:opacity-40 mt-4"
           >
             {busy ? "Connexion…" : "Accéder au desk"}
           </button>
-        </form>
+        </div>
       </div>
     </main>
   );
