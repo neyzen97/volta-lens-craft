@@ -64,14 +64,22 @@ function AdminPage() {
   }, [session]);
 
   async function checkAdmin() {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("user_roles")
       .select("role")
       .eq("user_id", session.user.id)
-      .eq("role", "admin")
       .maybeSingle();
-    if (data) { setIsAdmin(true); loadBriefs(); }
-    else setIsAdmin(false);
+    if (error) {
+      toast.error("Erreur: " + error.message);
+      setIsAdmin(false);
+      return;
+    }
+    if (data && (data.role === "admin")) {
+      setIsAdmin(true);
+      loadBriefs();
+    } else {
+      setIsAdmin(false);
+    }
   }
 
   async function loadBriefs() {
