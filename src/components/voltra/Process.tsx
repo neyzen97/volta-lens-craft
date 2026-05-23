@@ -1,80 +1,70 @@
 import { motion } from "motion/react";
-import brief from "@/assets/process-brief.jpg";
-import curation from "@/assets/process-curation.jpg";
-import handoff from "@/assets/process-handoff.jpg";
 
-const steps = [
+const etapes = [
   {
     n: "01",
-    label: "The Intent",
-    title: "Submit your brief.",
-    body: "Every detail matters — from the trajectory of the sun to the emotional resonance of the venue. A few minutes is all we ask.",
-    img: brief,
-    alt: "Hand writing on cream stationery with a fountain pen",
+    label: "Le Brief",
+    title: "Parlez-nous de votre vision.",
+    body: "En quelques minutes, décrivez votre événement, l'atmosphère souhaitée, vos références. Plus votre brief est sincère, plus notre sélection sera juste.",
   },
   {
     n: "02",
-    label: "The Curation",
-    title: "The Chosen Three.",
-    body: "Our directors review your brief and hand-select three artists whose visual language aligns with the legacy you wish to leave.",
-    img: curation,
-    alt: "Three photographic prints displayed on a dark oak table",
+    label: "La Sélection",
+    title: "Nous choisissons votre photographe.",
+    body: "Nos directeurs artistiques analysent votre brief et identifient le photographe dont le langage visuel correspond exactement à ce que vous cherchez.",
   },
   {
     n: "03",
-    label: "The Frame",
-    title: "Choose your eye.",
-    body: "Review intimate portfolios. Speak with the concierge. Confirm your photographer in a single, frictionless gesture.",
-    img: handoff,
-    alt: "Close up of a vintage camera lens with dramatic rim lighting",
+    label: "La Proposition",
+    title: "Une réponse. Personnelle.",
+    body: "Sous 48 heures, vous recevez une proposition unique — le profil de votre photographe, sa démarche, son tarif. Pas de catalogue. Juste l'évidence.",
   },
 ];
 
 export function Process() {
   return (
-    <section id="process" className="py-28 md:py-44 px-6 md:px-10 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20">
-        <div className="md:col-span-4 md:sticky md:top-32 h-fit">
+    <section id="methode" className="py-28 md:py-44 px-6 md:px-10">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="mb-20 md:mb-32 max-w-xl">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-6 block">
-            — The Method
+            — La Méthode
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl leading-[1.05] tracking-tight mb-8">
-            Precision <span className="italic">curation.</span>
+          <h2 className="font-serif text-4xl md:text-5xl leading-[1.05] tracking-tight">
+            Un photographe
+            <br />
+            <span className="italic text-foreground/60">choisi pour vous.</span>
           </h2>
-          <p className="font-sans text-foreground/55 leading-relaxed text-[15px] max-w-sm">
-            Marketplaces are noisy. Voltra is silent. We filter the world's most elite
-            photographic talent to present only the three perfect matches for your vision.
-          </p>
         </div>
 
-        <div className="md:col-start-6 md:col-span-7 space-y-24 md:space-y-40">
-          {steps.map((s, i) => (
+        {/* Étapes */}
+        <div className="space-y-0 divide-y divide-border">
+          {etapes.map((e, i) => (
             <motion.div
-              key={s.n}
-              initial={{ opacity: 0, y: 60 }}
+              key={e.n}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1.4, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group border-t border-border pt-10"
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 1.2, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 py-12 md:py-16"
             >
-              <div className="flex items-baseline justify-between mb-6">
-                <span className="font-mono text-accent text-[10px] uppercase tracking-[0.3em]">
-                  {s.n} — {s.label}
+              <div className="md:col-span-1 flex md:block items-center gap-4">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                  {e.n}
                 </span>
               </div>
-              <h3 className="font-serif text-3xl md:text-4xl mb-6 italic font-normal">
-                {s.title}
-              </h3>
-              <p className="text-foreground/55 max-w-md mb-10 leading-relaxed text-[15px]">
-                {s.body}
-              </p>
-              <div className="overflow-hidden">
-                <motion.img
-                  src={s.img}
-                  alt={s.alt}
-                  loading="lazy"
-                  className="w-full aspect-[16/10] object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                />
+              <div className="md:col-span-4">
+                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/35 mb-3 block">
+                  {e.label}
+                </span>
+                <h3 className="font-serif text-2xl md:text-3xl italic font-normal leading-tight">
+                  {e.title}
+                </h3>
+              </div>
+              <div className="md:col-span-6 md:col-start-7 flex items-center">
+                <p className="text-foreground/55 leading-relaxed text-[15px] max-w-lg">
+                  {e.body}
+                </p>
               </div>
             </motion.div>
           ))}
