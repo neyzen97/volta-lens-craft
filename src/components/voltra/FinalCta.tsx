@@ -3,9 +3,11 @@ import { motion } from "motion/react";
 
 export function FinalCta() {
   return (
-    <section className="relative py-32 md:py-56 px-6 md:px-10 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(184,146,58,0.07)_0%,_transparent_65%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(92,122,94,0.05)_0%,_transparent_50%)]" />
+    <section className="relative py-32 md:py-56 px-6 md:px-10 overflow-hidden bg-[#F8F6F1]">
+      {/* Cercles décoratifs photographiques */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-foreground/[0.04]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-accent/[0.06]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(184,146,58,0.05)_0%,_transparent_60%)]" />
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -15,32 +17,41 @@ export function FinalCta() {
         className="relative z-10 max-w-3xl mx-auto text-center"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-8 block">
-          — Commissions 2026 ouvertes
+          — Commissions juin 2026
         </span>
 
         <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-10">
-          Votre histoire
+          Arrêtez
           <br />
-          <span className="italic font-normal text-foreground/70">mérite l'excellence.</span>
+          <span className="italic font-normal text-foreground/50">de chercher.</span>
         </h2>
 
-        <p className="text-foreground/50 max-w-lg mx-auto mb-14 leading-relaxed text-[15px]">
-          Partagez votre brief. Nous vous répondons, nominalement,
-          sous quarante-huit heures avec la sélection parfaite.
+        <p className="text-foreground/50 max-w-md mx-auto mb-6 leading-relaxed text-[15px]">
+          Décrivez votre moment. Nous trouvons le photographe.
+          Vous vivez pleinement votre événement.
         </p>
 
-        <Link
-          to="/inquiry"
-          className="group relative inline-flex items-center px-12 py-5 bg-accent text-[#F7F4EE] font-mono text-[10px] uppercase tracking-[0.3em] overflow-hidden"
-        >
-          <span className="relative z-10 transition-transform duration-700 group-hover:-translate-x-2">
-            Soumettre mon brief
+        {/* Badge rareté */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-foreground/[0.04] border border-foreground/10 mb-12">
+          <span className="w-1.5 h-1.5 rounded-full bg-sage" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/40">
+            Il reste 7 disponibilités ce mois-ci
           </span>
-          <span className="relative z-10 ml-3 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-700">
-            →
-          </span>
-          <span className="absolute inset-0 bg-foreground translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]" />
-        </Link>
+        </div>
+
+        <div className="block">
+          <Link
+            to="/inquiry"
+            className="group relative inline-flex items-center gap-4 px-12 py-5 bg-foreground text-background font-mono text-[10px] uppercase tracking-[0.3em] overflow-hidden"
+          >
+            <span className="relative z-10">Soumettre mon brief</span>
+            <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-500">→</span>
+            <span className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]" />
+          </Link>
+          <p className="mt-5 font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/30">
+            Réponse sous 48h · Aucun engagement
+          </p>
+        </div>
       </motion.div>
     </section>
   );
