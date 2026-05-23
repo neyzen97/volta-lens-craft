@@ -64,17 +64,20 @@ function AdminPage() {
   }, [session]);
 
   async function checkAdmin() {
-    const { data, error } = await supabase
+    // Vérification par email admin hardcodé + user_roles
+    const adminEmail = "nolann2103@icloud.com";
+    if (session.user.email === adminEmail) {
+      setIsAdmin(true);
+      loadBriefs();
+      return;
+    }
+    // Sinon vérifier user_roles
+    const { data } = await supabase
       .from("user_roles")
       .select("role")
       .eq("user_id", session.user.id)
       .maybeSingle();
-    if (error) {
-      toast.error("Erreur: " + error.message);
-      setIsAdmin(false);
-      return;
-    }
-    if (data && (data.role === "admin")) {
+    if (data && data.role === "admin") {
       setIsAdmin(true);
       loadBriefs();
     } else {
