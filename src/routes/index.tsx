@@ -1,26 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Nav } from "@/components/voltra/Nav";
+import { Hero } from "@/components/voltra/Hero";
+import { Process } from "@/components/voltra/Process";
+import { Why } from "@/components/voltra/Why";
+import { Testimonials } from "@/components/voltra/Testimonials";
+import { Gallery } from "@/components/voltra/Gallery";
+import { FinalCta } from "@/components/voltra/FinalCta";
+import { SiteFooter } from "@/components/voltra/SiteFooter";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: Landing,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Landing() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="bg-background text-foreground grain">
+      <Nav />
+      <Hero />
+      <Process />
+      <Why />
+      <Testimonials />
+      <Gallery />
+      <FinalCta />
+      <SiteFooter />
+    </main>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
