@@ -2,10 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/voltra/Nav";
 import { Hero } from "@/components/voltra/Hero";
 import { Process } from "@/components/voltra/Process";
-import { Why } from "@/components/voltra/Why";
 import { Testimonials } from "@/components/voltra/Testimonials";
-import { Gallery } from "@/components/voltra/Gallery";
 import { FinalCta } from "@/components/voltra/FinalCta";
+import { Photographers } from "@/components/voltra/Photographers";
 import { SiteFooter } from "@/components/voltra/SiteFooter";
 
 export const Route = createFileRoute("/")({
@@ -18,10 +17,9 @@ function Landing() {
       <Nav />
       <Hero />
       <Process />
-      <Why />
       <Testimonials />
-      <Gallery />
       <FinalCta />
+      <Photographers />
       <SiteFooter />
     </main>
   );

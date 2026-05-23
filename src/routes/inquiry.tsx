@@ -10,10 +10,10 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/inquiry")({
   head: () => ({
     meta: [
-      { title: "The Brief — Voltra" },
+      { title: "Votre Brief — Voltra" },
       {
         name: "description",
-        content: "Share your event with Voltra. We respond, by name, within 48 hours.",
+        content: "Partagez votre vision avec Voltra. Nous vous répondons, nominalement, sous 48 heures.",
       },
     ],
   }),
@@ -35,22 +35,22 @@ const schema = z.object({
 type FormState = z.input<typeof schema>;
 
 const OCCASIONS = [
-  "Private Wedding",
-  "Editorial / Lifestyle",
-  "Corporate Portraiture",
-  "Family Archive",
-  "Event Documentary",
-  "Other",
+  "Mariage privé",
+  "Éditorial / Lifestyle",
+  "Portrait corporate",
+  "Archive familiale",
+  "Événement",
+  "Autre",
 ];
-const STYLES = ["Cinematic", "Editorial", "Documentary", "Fine Art", "Reportage"];
+const STYLES = ["Cinématique", "Éditorial", "Documentaire", "Beaux-arts", "Reportage"];
 const BUDGETS = ["< 3 000 €", "3 — 7 000 €", "7 — 15 000 €", "15 — 30 000 €", "30 000 € +"];
 
-const STEPS = [
-  { k: "occasion", label: "Occasion" },
-  { k: "date", label: "When" },
-  { k: "context", label: "Context" },
-  { k: "vision", label: "Vision" },
-  { k: "contact", label: "Contact" },
+const ETAPES = [
+  { k: "occasion", label: "L'Occasion" },
+  { k: "date", label: "Le Moment" },
+  { k: "contexte", label: "Le Contexte" },
+  { k: "vision", label: "La Vision" },
+  { k: "contact", label: "Le Contact" },
 ] as const;
 
 function InquiryPage() {
@@ -80,11 +80,11 @@ function InquiryPage() {
 
   const next = async () => {
     if (!canProceed()) return;
-    if (step < STEPS.length - 1) return setStep(step + 1);
+    if (step < ETAPES.length - 1) return setStep(step + 1);
 
     const parsed = schema.safeParse(form);
     if (!parsed.success) {
-      toast.error("Please review your details.");
+      toast.error("Veuillez vérifier vos informations.");
       return;
     }
     setSubmitting(true);
@@ -101,28 +101,28 @@ function InquiryPage() {
     });
     setSubmitting(false);
     if (error) {
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Une erreur est survenue. Veuillez réessayer.");
       return;
     }
     navigate({ to: "/confirmation" });
   };
 
   const prev = () => step > 0 && setStep(step - 1);
-  const progress = ((step + 1) / STEPS.length) * 100;
+  const progress = ((step + 1) / ETAPES.length) * 100;
 
   return (
     <main className="bg-background text-foreground min-h-screen grain">
       <Nav />
 
       <section className="pt-32 pb-24 px-6 md:px-10 max-w-3xl mx-auto">
-        {/* Progress */}
+        {/* Progression */}
         <div className="mb-16">
           <div className="flex items-center justify-between mb-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
-              Step {String(step + 1).padStart(2, "0")} / {String(STEPS.length).padStart(2, "0")}
+              Étape {String(step + 1).padStart(2, "0")} / {String(ETAPES.length).padStart(2, "0")}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">
-              {STEPS[step].label}
+              {ETAPES[step].label}
             </span>
           </div>
           <div className="h-[1px] w-full bg-border relative overflow-hidden">
@@ -144,143 +144,144 @@ function InquiryPage() {
             className="min-h-[420px]"
           >
             {step === 0 && (
-              <Step
-                eyebrow="The Foundation"
-                title="What are we documenting?"
-                hint="Choose the occasion closest to your event — we'll refine the rest together."
+              <Etape
+                label="Le Point de Départ"
+                titre="Que souhaitez-vous immortaliser ?"
+                indice="Choisissez l'occasion la plus proche de votre projet — nous affinerons ensemble."
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {OCCASIONS.map((o) => (
-                    <Choice
+                    <Choix
                       key={o}
                       label={o}
-                      active={form.occasion === o}
+                      actif={form.occasion === o}
                       onClick={() => update("occasion", o)}
                     />
                   ))}
                 </div>
-              </Step>
+              </Etape>
             )}
 
             {step === 1 && (
-              <Step
-                eyebrow="The Moment"
-                title="When does it unfold?"
-                hint="Approximate dates are perfectly fine. We work many months in advance."
+              <Etape
+                label="Le Moment"
+                titre="Quand cela se déroule-t-il ?"
+                indice="Une date approximative convient parfaitement. Nous planifions plusieurs mois à l'avance."
               >
                 <div className="space-y-8">
-                  <Field
-                    label="Event date"
+                  <Champ
+                    label="Date de l'événement"
                     type="date"
                     value={form.event_date || ""}
                     onChange={(v) => update("event_date", v)}
                   />
-                  <Field
-                    label="Location (city, region, venue)"
-                    placeholder="e.g. Villa Cetinale, Tuscany"
+                  <Champ
+                    label="Lieu (ville, région, lieu de réception)"
+                    placeholder="Ex. Villa Cetinale, Toscane"
                     value={form.location || ""}
                     onChange={(v) => update("location", v)}
                   />
                 </div>
-              </Step>
+              </Etape>
             )}
 
             {step === 2 && (
-              <Step
-                eyebrow="The Context"
-                title="Scope & investment."
-                hint="A directional budget helps us match you with photographers whose calendars align."
+              <Etape
+                label="Le Contexte"
+                titre="Périmètre & investissement."
+                indice="Une fourchette indicative nous aide à vous proposer un photographe dont l'agenda correspond."
               >
                 <div className="space-y-10">
-                  <ChoiceGroup
+                  <GroupeChoix
                     label="Budget"
                     options={BUDGETS}
                     value={form.budget || ""}
                     onChange={(v) => update("budget", v)}
                   />
-                  <Field
-                    label="Expected guests / scale"
-                    placeholder="e.g. 80 guests · 2 days"
+                  <Champ
+                    label="Nombre d'invités / envergure"
+                    placeholder="Ex. 80 convives · 2 jours"
                     value={form.guests || ""}
                     onChange={(v) => update("guests", v)}
                   />
                 </div>
-              </Step>
+              </Etape>
             )}
 
             {step === 3 && (
-              <Step
-                eyebrow="The Vision"
-                title="Tell us about the light."
-                hint="The mood, the references, what you wish to remember. There is no wrong answer."
+              <Etape
+                label="La Vision"
+                titre="Parlez-nous de la lumière."
+                indice="L'atmosphère, les références, ce dont vous souhaitez garder la trace. Il n'y a pas de mauvaise réponse."
               >
                 <div className="space-y-10">
-                  <ChoiceGroup
-                    label="Preferred style"
+                  <GroupeChoix
+                    label="Style souhaité"
                     options={STYLES}
                     value={form.style || ""}
                     onChange={(v) => update("style", v)}
                   />
-                  <Field
-                    label="A note from you"
-                    placeholder="The mood, the moments you wish captured, the legacy you have in mind…"
+                  <Champ
+                    label="Un mot de votre part"
+                    placeholder="L'ambiance, les instants à capturer, l'héritage que vous souhaitez laisser…"
                     value={form.vision || ""}
                     onChange={(v) => update("vision", v)}
                     textarea
                   />
                 </div>
-              </Step>
+              </Etape>
             )}
 
             {step === 4 && (
-              <Step
-                eyebrow="The Introduction"
-                title="Where shall we reach you?"
-                hint="A concierge will respond, by name, within 48 hours. We never share your details."
+              <Etape
+                label="L'Introduction"
+                titre="Comment vous joindre ?"
+                indice="Un concierge vous répondra, nominalement, sous 48 heures. Vos informations restent strictement confidentielles."
               >
                 <div className="space-y-8">
-                  <Field
-                    label="Your name"
-                    placeholder="Full name"
+                  <Champ
+                    label="Votre nom"
+                    placeholder="Prénom et nom"
                     value={form.full_name}
                     onChange={(v) => update("full_name", v)}
                   />
-                  <Field
-                    label="Email"
+                  <Champ
+                    label="Adresse e-mail"
                     type="email"
-                    placeholder="you@domain.com"
+                    placeholder="vous@domaine.com"
                     value={form.email}
                     onChange={(v) => update("email", v)}
                   />
                 </div>
-              </Step>
+              </Etape>
             )}
           </motion.div>
         </AnimatePresence>
 
-        {/* Controls */}
+        {/* Contrôles */}
         <div className="mt-16 flex items-center justify-between border-t border-border pt-8">
           <button
             onClick={prev}
             disabled={step === 0}
             className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/50 hover:text-accent transition-colors disabled:opacity-20"
           >
-            ← Back
+            ← Retour
           </button>
           <button
             onClick={next}
             disabled={!canProceed() || submitting}
-            className="group relative px-10 py-4 bg-accent text-background font-mono text-[10px] uppercase tracking-[0.25em] overflow-hidden disabled:opacity-40 disabled:cursor-not-allowed"
+            className="group relative px-10 py-4 bg-accent text-[#F7F4EE] font-mono text-[10px] uppercase tracking-[0.25em] overflow-hidden disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <span className="relative z-10">
-              {submitting ? "Sending…" : step === STEPS.length - 1 ? "Submit brief" : "Continue"}
+              {submitting ? "Envoi…" : step === ETAPES.length - 1 ? "Envoyer mon brief" : "Continuer"}
             </span>
             <span className="absolute inset-0 bg-foreground translate-y-full group-hover:not-disabled:translate-y-0 transition-transform duration-700" />
           </button>
         </div>
 
         <p className="mt-10 text-center font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/30">
-          Prefer email? <Link to="/" className="text-accent hover:underline">concierge@voltra.studio</Link>
+          Vous préférez l'e-mail ?{" "}
+          <Link to="/" className="text-accent hover:underline">concierge@voltra.studio</Link>
         </p>
       </section>
 
@@ -289,71 +290,55 @@ function InquiryPage() {
   );
 }
 
-function Step({
-  eyebrow,
-  title,
-  hint,
+function Etape({
+  label,
+  titre,
+  indice,
   children,
 }: {
-  eyebrow: string;
-  title: string;
-  hint: string;
+  label: string;
+  titre: string;
+  indice: string;
   children: React.ReactNode;
 }) {
   return (
     <div>
       <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-4 block">
-        — {eyebrow}
+        — {label}
       </span>
       <h1 className="font-serif text-4xl md:text-5xl mb-4 leading-[1.05] tracking-tight">
-        {title}
+        {titre}
       </h1>
-      <p className="text-foreground/50 mb-12 max-w-md leading-relaxed text-[15px]">{hint}</p>
+      <p className="text-foreground/50 mb-12 max-w-md leading-relaxed text-[15px]">{indice}</p>
       {children}
     </div>
   );
 }
 
-function Choice({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
+function Choix({ label, actif, onClick }: { label: string; actif: boolean; onClick: () => void }) {
   return (
     <button
       type="button"
       onClick={onClick}
       className={`group text-left p-6 border transition-all duration-500 ${
-        active
+        actif
           ? "border-accent bg-accent/5"
           : "border-border hover:border-foreground/30 hover:bg-foreground/[0.02]"
       }`}
     >
-      <span
-        className={`font-serif text-lg italic transition-colors ${
-          active ? "text-accent" : "text-foreground/80 group-hover:text-foreground"
-        }`}
-      >
+      <span className={`font-serif text-lg italic transition-colors ${
+        actif ? "text-accent" : "text-foreground/80 group-hover:text-foreground"
+      }`}>
         {label}
       </span>
     </button>
   );
 }
 
-function ChoiceGroup({
-  label,
-  options,
-  value,
-  onChange,
+function GroupeChoix({
+  label, options, value, onChange,
 }: {
-  label: string;
-  options: string[];
-  value: string;
-  onChange: (v: string) => void;
+  label: string; options: string[]; value: string; onChange: (v: string) => void;
 }) {
   return (
     <div>
@@ -380,20 +365,11 @@ function ChoiceGroup({
   );
 }
 
-function Field({
-  label,
-  value,
-  onChange,
-  placeholder,
-  type = "text",
-  textarea,
+function Champ({
+  label, value, onChange, placeholder, type = "text", textarea,
 }: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-  type?: string;
-  textarea?: boolean;
+  label: string; value: string; onChange: (v: string) => void;
+  placeholder?: string; type?: string; textarea?: boolean;
 }) {
   return (
     <div>
@@ -414,7 +390,7 @@ function Field({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-transparent border-b border-border focus:border-accent outline-none py-3 font-sans text-[15px] text-foreground placeholder:text-foreground/25 transition-colors duration-500 [color-scheme:dark]"
+          className="w-full bg-transparent border-b border-border focus:border-accent outline-none py-3 font-sans text-[15px] text-foreground placeholder:text-foreground/25 transition-colors duration-500 [color-scheme:light]"
         />
       )}
     </div>

@@ -6,8 +6,8 @@ import { SiteFooter } from "@/components/voltra/SiteFooter";
 export const Route = createFileRoute("/confirmation")({
   head: () => ({
     meta: [
-      { title: "Brief received — Voltra" },
-      { name: "description", content: "Your brief has reached the concierge." },
+      { title: "Brief reçu — Voltra" },
+      { name: "description", content: "Votre brief est entre les mains du concierge." },
     ],
   }),
   component: Confirmation,
@@ -19,7 +19,8 @@ function Confirmation() {
       <Nav />
 
       <section className="flex-1 flex items-center justify-center px-6 py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.07)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(184,146,58,0.06)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(92,122,94,0.04)_0%,_transparent_50%)]" />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -37,32 +38,30 @@ function Confirmation() {
           </motion.div>
 
           <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-6 block">
-            — The lens is focused
+            — La mise au point est faite
           </span>
 
           <h1 className="font-serif text-5xl md:text-7xl leading-[1] tracking-tight mb-10">
-            Your brief
+            Votre brief
             <br />
-            <span className="italic font-normal text-foreground/80">has arrived.</span>
+            <span className="italic font-normal text-foreground/70">est arrivé.</span>
           </h1>
 
-          <p className="text-foreground/55 max-w-md mx-auto leading-relaxed text-[15px] mb-14">
-            A concierge is now reading your story. Within forty-eight hours you will receive a
-            private letter with three photographers selected, by hand, for your event.
+          <p className="text-foreground/50 max-w-md mx-auto leading-relaxed text-[15px] mb-14">
+            Un concierge lit votre brief en ce moment. Vous recevrez, sous quarante-huit heures,
+            une proposition personnelle avec le photographe sélectionné pour vous.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              to="/"
-              className="px-10 py-4 border border-foreground/25 font-mono text-[10px] uppercase tracking-[0.25em] hover:bg-foreground hover:text-background transition-all duration-700"
-            >
-              Return to Voltra
-            </Link>
-          </div>
+          <Link
+            to="/"
+            className="px-10 py-4 border border-foreground/20 font-mono text-[10px] uppercase tracking-[0.25em] hover:bg-foreground hover:text-background transition-all duration-700"
+          >
+            Retourner sur Voltra
+          </Link>
 
           <div className="mt-20 pt-10 border-t border-border max-w-sm mx-auto">
-            <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/40">
-              Reference · {Date.now().toString(36).toUpperCase().slice(-6)}
+            <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/35">
+              Référence · {Date.now().toString(36).toUpperCase().slice(-6)}
             </p>
           </div>
         </motion.div>
