@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router"; 
 import { Nav } from "@/components/voltra/Nav";
 import { Hero } from "@/components/voltra/Hero";
 import { MediaLogos } from "@/components/voltra/MediaLogos";
