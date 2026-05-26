@@ -105,6 +105,34 @@ function AdminPage() {
     const { error } = await supabase.from("briefs").update({ status }).eq("id", id);
     if (error) { toast.error(error.message); return; }
     toast.success("Statut mis à jour");
+
+    // Envoyer email selon le nouveau statut
+    const brief = briefs.find(b => b.id === id);
+    if (brief) {
+      if (status === "matched") {
+        fetch("/api/email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "photographer_matched",
+            to: brief.email,
+            data: { name: brief.full_name, occasion: brief.occasion },
+          }),
+        });
+      }
+      if (status === "validated") {
+        fetch("/api/email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "photographer_paid",
+            to: brief.email,
+            data: { occasion: brief.occasion, amount: brief.photographer_payout ?? "—" },
+          }),
+        });
+      }
+    }
+
     loadBriefs();
     if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : null);
   }
