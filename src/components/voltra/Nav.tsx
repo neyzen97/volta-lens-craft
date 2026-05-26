@@ -32,12 +32,20 @@ export function Nav() {
         </a>
       </div>
 
-      <Link
-        to="/inquiry"
-        className="px-5 py-2.5 border border-foreground/20 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground hover:bg-foreground hover:text-background transition-all duration-500"
-      >
-        Soumettre un brief
-      </Link>
+      <div className="flex items-center gap-3">
+        <Link
+          to="/mon-espace"
+          className="hidden md:block font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40 hover:text-accent transition-colors duration-500"
+        >
+          Mon espace
+        </Link>
+        <Link
+          to="/inquiry"
+          className="px-5 py-2.5 border border-foreground/20 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground hover:bg-foreground hover:text-background transition-all duration-500"
+        >
+          Soumettre un brief
+        </Link>
+      </div>
     </motion.nav>
   );
 }
