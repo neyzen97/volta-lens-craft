@@ -27,7 +27,7 @@ const STATUS_LABELS: Record<string, { label: string; color: string }> = {
   confirmed: { label: "Confirmé",           color: "text-green-700 bg-green-50 border-green-200" },
   completed: { label: "Terminé",            color: "text-foreground/50 bg-surface border-border" },
   validated: { label: "Validé ✓",           color: "text-accent bg-accent/5 border-accent/20" },
-  disputed:  { label: "Litige",             color: "text-red-600 bg-red-50 border-red-200" },
+  disputed:  { label: "⚠ Litige urgent",    color: "text-red-600 bg-red-50 border-red-200" },
   cancelled: { label: "Annulé",             color: "text-foreground/30 bg-surface border-border" },
 };
 
@@ -294,6 +294,18 @@ function BriefDetail({
           </p>
           <p className="font-serif italic text-[15px] text-foreground/75 leading-relaxed">
             "{brief.vision}"
+          </p>
+        </div>
+      )}
+
+      {/* Litige */}
+      {(brief as any).dispute_reason && (
+        <div className="mb-8 p-5 bg-red-50 border-l-2 border-red-400">
+          <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-red-500 mb-3">
+            ⚠ Litige signalé par le client
+          </p>
+          <p className="font-serif italic text-[15px] text-red-700 leading-relaxed">
+            "{(brief as any).dispute_reason}"
           </p>
         </div>
       )}
