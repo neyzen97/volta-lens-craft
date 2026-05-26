@@ -120,6 +120,40 @@ function InquiryPage() {
       toast.error("Une erreur est survenue. Veuillez réessayer.");
       return;
     }
+    // Envoyer email de confirmation au client
+    fetch("/api/email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "brief_received",
+        to: parsed.data.email,
+        data: {
+          name: parsed.data.full_name,
+          occasion: parsed.data.occasion,
+          event_date: parsed.data.event_date || null,
+          location: parsed.data.location || null,
+        },
+      }),
+    });
+
+    // Envoyer email à l'admin
+    fetch("/api/email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "admin_new_brief",
+        to: "nolann2103@icloud.com",
+        data: {
+          name: parsed.data.full_name,
+          email: parsed.data.email,
+          occasion: parsed.data.occasion,
+          event_date: parsed.data.event_date || null,
+          budget: parsed.data.budget || null,
+          vision: parsed.data.vision || null,
+        },
+      }),
+    });
+
     navigate({ to: "/confirmation" });
   };
 
