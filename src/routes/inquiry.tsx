@@ -43,7 +43,7 @@ const OCCASIONS = [
   "Autre",
 ];
 const STYLES = ["Cinématique", "Éditorial", "Documentaire", "Beaux-arts", "Reportage"];
-const BUDGETS = ["< 3 000 €", "3 — 7 000 €", "7 — 15 000 €", "15 — 30 000 €", "30 000 € +"];
+const BUDGETS = ["< 1 000 €", "1 000 — 5 000 €", "5 000 — 10 000 €", "10 000 — 20 000 €", "20 000 € +"];
 
 const ETAPES = [
   { k: "occasion", label: "L'Occasion" },
@@ -88,7 +88,21 @@ function InquiryPage() {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase.from("inquiries").insert({
+
+    // 1. Créer le compte client automatiquement
+    const password = Math.random().toString(36).slice(-10) + "A1!";
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email: parsed.data.email,
+      password,
+      options: { data: { full_name: parsed.data.full_name } }
+    });
+
+    // Si compte existe déjà, on continue quand même
+    const userId = authData?.user?.id;
+
+    // 2. Insérer le brief
+    const { error } = await supabase.from("briefs").insert({
+      client_id: userId ?? null,
       occasion: parsed.data.occasion,
       event_date: parsed.data.event_date || null,
       location: parsed.data.location || null,
@@ -98,7 +112,9 @@ function InquiryPage() {
       vision: parsed.data.vision || null,
       full_name: parsed.data.full_name,
       email: parsed.data.email,
+      status: "pending",
     });
+
     setSubmitting(false);
     if (error) {
       toast.error("Une erreur est survenue. Veuillez réessayer.");
@@ -154,11 +170,26 @@ function InquiryPage() {
                     <Choix
                       key={o}
                       label={o}
-                      actif={form.occasion === o}
+                      actif={form.occasion === o || (o === "Autre" && form.occasion.startsWith("Autre —"))}
                       onClick={() => update("occasion", o)}
                     />
                   ))}
                 </div>
+                {(form.occasion === "Autre" || form.occasion.startsWith("Autre —")) && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-6"
+                  >
+                    <Champ
+                      label="Précisez votre événement"
+                      placeholder="Décrivez brièvement votre projet…"
+                      value={form.occasion.startsWith("Autre —") ? form.occasion.replace("Autre — ", "") : ""}
+                      onChange={(v) => update("occasion", v ? `Autre — ${v}` : "Autre")}
+                    />
+                  </motion.div>
+                )}
               </Etape>
             )}
 
