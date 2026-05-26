@@ -35,10 +35,11 @@ const schema = z.object({
 type FormState = z.input<typeof schema>;
 
 const OCCASIONS = [
-  "Mariage privé",
-  "Éditorial / Lifestyle",
-  "Portrait corporate",
-  "Archive familiale",
+  "Mariage",
+  "Shooting",
+  "Sport",
+  "Immobilier",
+  "Corporate",
   "Événement",
   "Autre",
 ];
