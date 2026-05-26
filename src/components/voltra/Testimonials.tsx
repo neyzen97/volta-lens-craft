@@ -2,25 +2,25 @@ import { motion } from "motion/react";
 
 const temoignages = [
   {
-    corps: "J'avais regardé des centaines de portfolios pendant des semaines. À un moment t'en as juste marre, tu sais plus quoi choisir. Un ami m'a parlé de Voltra. J'ai rempli le formulaire un soir. Deux jours après, ils m'ont envoyé un profil. C'était exactement ce que je cherchais sans savoir vraiment le formuler. Les photos de notre mariage sont au-dessus de tout ce qu'on espérait.",
+    corps: "J'avais regardé des centaines de portfolios pendant des semaines. Un ami m'a parlé de Voltra. J'ai rempli le formulaire un soir. Deux jours après, ils m'ont envoyé un profil. C'était exactement ce que je cherchais sans savoir vraiment le formuler. Les photos de notre mariage sont au-dessus de tout ce qu'on espérait. Merci beaucoup !",
     nom: "Camille & Romain D.",
     meta: "Mariage — Aix-en-Provence, Septembre 2024",
     initiale: "C",
   },
   {
-    corps: "Honnêtement je pensais que c'était un truc marketing de plus. On organise des tournois de padel depuis 5 ans, on a toujours galéré avec les photographes — soit trop chers, soit les photos sont décevantes. Là c'était fluide du début à la fin. Le photographe connaissait le sport, comprenait les angles. On a des images qu'on utilise encore partout.",
+    corps: "Honnêtement je pensais que c'était un truc marketing de plus. On organise des tournois de padel depuis 5 ans, on a toujours galéré avec les photographes, soit trop chers, soit les photos sont décevantes. Là c'était fluide du début à la fin. Le photographe connaissait le sport, comprenait les angles. On a des images qu'on utilise encore partout. Je n'hesiterai pas a repasser par Voltra si il faut !,
     nom: "Mehdi L.",
     meta: "Directeur sportif — Open de Padel Paris, Juin 2024",
     initiale: "M",
   },
   {
-    corps: "Notre campagne printemps devait être tournée en trois semaines. Je n'avais pas le temps de chercher. J'ai envoyé mon brief un lundi matin. Le mercredi j'avais une proposition avec un photographe que je ne connaissais pas mais dont le travail m'a coupé le souffle. C'est rare de tomber juste aussi vite.",
+    corps: "Notre campagne printemps devait être tournée en trois semaines. Je n'avais pas le temps de chercher. J'ai envoyé mon brief un lundi matin. Le mardi après-midi j'avais une proposition avec un photographe que je ne connaissais pas mais dont le travail m'a coupé le souffle. C'est rare de tomber juste aussi vite.",
     nom: "Léa T.",
     meta: "Directrice de création — Maison Éclat, Paris",
     initiale: "L",
   },
   {
-    corps: "Pour nos annonces immobilières haut de gamme, la photo c'est tout. Avant Voltra on testait des gens au hasard, c'était aléatoire. Maintenant on passe par eux systématiquement. Le processus est court, les résultats sont constants. C'est devenu un réflexe.",
+    corps: "Pour nos annonces immobilières haut de gamme, la photo c'est tout. Avant Voltra on testait des gens au hasard, c'était aléatoire. Maintenant on passe par eux systématiquement. Le processus est court, les résultats sont constants. C'est devenu un réflexe. Je recommande !",
     nom: "Alexandre B.",
     meta: "Agent immobilier de prestige — 7ème arrondissement, Paris",
     initiale: "A",
