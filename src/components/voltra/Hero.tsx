@@ -2,31 +2,31 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 
 const HERO_URL =
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=90&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1519741497674-611481863552?w=2400&q=90&auto=format&fit=crop";
 
 export function Hero() {
   return (
     <section className="relative h-[100svh] min-h-[700px] flex flex-col justify-center items-center overflow-hidden bg-[#F8F6F1]">
-      {/* Fond photographique cinématique */}
+      {/* Image de fond */}
       <div className="absolute inset-0 z-0 animate-aperture overflow-hidden">
         <div className="absolute inset-0 animate-ken-burns">
           <img
             src={HERO_URL}
-            alt="Montagne enneigée sous lumière dorée"
-            className="w-full h-full object-cover opacity-30"
+            alt="Photographe capturant un moment d'exception"
+            className="w-full h-full object-cover opacity-25"
             fetchPriority="high"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F8F6F1]/60 via-[#F8F6F1]/20 to-[#F8F6F1]/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F8F6F1]/70 via-[#F8F6F1]/20 to-[#F8F6F1]/85" />
       </div>
 
-      {/* Cercle d'ouverture décoratif — référence photographique */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(80vw,700px)] h-[min(80vw,700px)] rounded-full border border-foreground/[0.04] z-0" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(65vw,560px)] h-[min(65vw,560px)] rounded-full border border-foreground/[0.06] z-0" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(50vw,420px)] h-[min(50vw,420px)] rounded-full border border-accent/10 z-0" />
+      {/* Cercles décoratifs */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(85vw,750px)] h-[min(85vw,750px)] rounded-full border border-foreground/[0.03] z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(65vw,560px)] h-[min(65vw,560px)] rounded-full border border-foreground/[0.05] z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(45vw,380px)] h-[min(45vw,380px)] rounded-full border border-accent/[0.08] z-0" />
 
-      {/* Lumière chaude */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[rgba(184,146,58,0.06)] blur-[180px] z-0" />
+      {/* Lumières */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[rgba(184,146,58,0.05)] blur-[160px] z-0" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-[rgba(92,122,94,0.04)] blur-[140px] z-0" />
 
       {/* Aperture blades */}
@@ -38,89 +38,94 @@ export function Hero() {
 
       {/* Contenu */}
       <div className="relative z-10 text-center px-6 max-w-5xl">
-        <motion.span
-          initial={{ opacity: 0, letterSpacing: "0.1em" }}
-          animate={{ opacity: 1, letterSpacing: "0.45em" }}
-          transition={{ duration: 1.8, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="font-mono text-[10px] uppercase tracking-[0.45em] text-foreground/40 mb-10 block"
+        {/* Badge autorité */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="inline-flex items-center gap-3 px-5 py-2.5 border border-foreground/10 bg-background/80 backdrop-blur-sm mb-10"
         >
-          — Service de sélection photographique —
-        </motion.span>
+          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.35em] text-foreground/50">
+            La référence française en sélection photographique
+          </span>
+        </motion.div>
 
+        {/* Titre principal */}
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 2, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-[clamp(3.2rem,9vw,8rem)] leading-[0.9] tracking-[-0.03em] text-foreground"
+          transition={{ duration: 2, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-[clamp(3rem,9vw,7.5rem)] leading-[0.9] tracking-[-0.03em] text-foreground"
         >
-          Votre moment
+          Le meilleur
           <br />
-          <span className="italic font-normal text-foreground/50">mérite</span>
+          <span className="italic font-normal text-foreground/45">photographe.</span>
           <br />
-          <span className="text-accent">l'évidence.</span>
+          <span className="text-accent">Pour vous.</span>
         </motion.h1>
 
+        {/* Sous-titre */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.6, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-12 font-sans text-[15px] md:text-base text-foreground/50 max-w-lg mx-auto leading-relaxed"
+          transition={{ duration: 1.6, delay: 2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 font-sans text-[15px] md:text-base text-foreground/50 max-w-md mx-auto leading-relaxed"
         >
-          Finis les heures de recherche, les doutes, les compromis.
-          Voltra identifie le photographe fait pour vous — et vous le présente.
+          Décrivez votre événement en 5 minutes.
+          Nous sélectionnons le photographe parfait. Vous vivez pleinement.
         </motion.p>
 
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 1.4, delay: 2.4, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link
             to="/inquiry"
             className="group relative px-10 py-5 bg-foreground text-background font-mono text-[10px] uppercase tracking-[0.28em] overflow-hidden"
           >
-            <span className="relative z-10 transition-colors duration-500 group-hover:text-background">
-              Soumettre mon brief
-            </span>
+            <span className="relative z-10">Trouver mon photographe</span>
             <span className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]" />
           </Link>
           <a
             href="#methode"
-            className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/40 hover:text-foreground transition-colors duration-500 flex items-center gap-2"
+            className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/35 hover:text-foreground transition-colors duration-500"
           >
-            Découvrir la méthode <span className="text-accent">↓</span>
+            Comment ça marche →
           </a>
         </motion.div>
 
-        {/* Badge rareté premium */}
+        {/* Badge rareté */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 3 }}
-          className="mt-16 inline-flex items-center gap-3 px-5 py-3 border border-foreground/10 bg-background/60 backdrop-blur-sm"
+          className="mt-14 inline-flex items-center gap-3 px-5 py-3 border border-foreground/8 bg-background/60 backdrop-blur-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-sage animate-pulse" />
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/45">
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/40">
             7 commissions disponibles en juin 2026
           </span>
         </motion.div>
       </div>
 
       {/* Marques de cadre */}
-      <div className="absolute top-8 left-8 w-5 h-5 border-l border-t border-foreground/15 z-10" />
-      <div className="absolute top-8 right-8 w-5 h-5 border-r border-t border-foreground/15 z-10" />
-      <div className="absolute bottom-8 left-8 w-5 h-5 border-l border-b border-foreground/15 z-10" />
-      <div className="absolute bottom-8 right-8 w-5 h-5 border-r border-b border-foreground/15 z-10" />
+      <div className="absolute top-8 left-8 w-5 h-5 border-l border-t border-foreground/12 z-10" />
+      <div className="absolute top-8 right-8 w-5 h-5 border-r border-t border-foreground/12 z-10" />
+      <div className="absolute bottom-8 left-8 w-5 h-5 border-l border-b border-foreground/12 z-10" />
+      <div className="absolute bottom-8 right-8 w-5 h-5 border-r border-b border-foreground/12 z-10" />
 
-      {/* Scroll indicator */}
+      {/* Scroll */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 3.2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10"
       >
-        <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-accent/50 origin-top animate-[shimmer-line_1.6s_var(--ease-out-expo)_3.2s_both]" />
+        <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-accent/40" />
       </motion.div>
     </section>
   );
