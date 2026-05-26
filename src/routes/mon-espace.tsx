@@ -23,6 +23,9 @@ type Brief = {
   total_amount: number | null;
   deposit_paid: boolean;
   final_paid: boolean;
+  payment_status: string | null;
+  paid_at: string | null;
+  dispute_reason: string | null;
   photos_delivered_at: string | null;
   confirmation_deadline: string | null;
 };
@@ -260,7 +263,7 @@ function ClientSpace() {
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <PaymentTab brief={brief} />
+                  <PaymentTab brief={brief} userId={session.user.id} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -442,9 +445,61 @@ function MessagesTab({
 
 // ─── Payment Tab ──────────────────────────────────────────────────────────────
 
-function PaymentTab({ brief }: { brief: Brief }) {
-  const deposit = brief.total_amount ? brief.total_amount * 0.5 : null;
-  const final = brief.total_amount ? brief.total_amount * 0.5 : null;
+function PaymentTab({ brief, userId }: { brief: Brief; userId: string }) {
+  const [paying, setPaying] = useState(false);
+  const [showDispute, setShowDispute] = useState(false);
+  const [disputeReason, setDisputeReason] = useState("");
+  const [submittingDispute, setSubmittingDispute] = useState(false);
+
+  const isPaid = brief.payment_status === "held" || brief.payment_status === "released";
+  const isReleased = brief.payment_status === "released";
+  const isDisputed = brief.payment_status === "disputed";
+
+  async function handlePayment() {
+    if (!brief.total_amount) return;
+    setPaying(true);
+    try {
+      const res = await fetch("/api/stripe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: brief.total_amount,
+          briefId: brief.id,
+          type: "full",
+          description: brief.occasion,
+        }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+      else toast.error("Erreur lors du paiement");
+    } catch {
+      toast.error("Erreur lors du paiement");
+    }
+    setPaying(false);
+  }
+
+  async function submitDispute() {
+    if (!disputeReason.trim()) { toast.error("Décrivez le problème"); return; }
+    setSubmittingDispute(true);
+    const { error } = await supabase.from("disputes").insert({
+      brief_id: brief.id,
+      client_id: userId,
+      reason: disputeReason,
+    });
+    if (!error) {
+      await supabase.from("briefs").update({ 
+        status: "disputed",
+        payment_status: "disputed",
+        dispute_reason: disputeReason,
+        dispute_at: new Date().toISOString()
+      }).eq("id", brief.id);
+      toast.success("Litige signalé — notre équipe vous contacte sous 24h");
+      setShowDispute(false);
+    } else {
+      toast.error(error.message);
+    }
+    setSubmittingDispute(false);
+  }
 
   return (
     <div className="space-y-6">
@@ -456,51 +511,104 @@ function PaymentTab({ brief }: { brief: Brief }) {
         </div>
       ) : (
         <>
-          <div className="grid md:grid-cols-2 gap-4">
-            {/* Acompte */}
-            <div className={`border p-8 ${brief.deposit_paid ? "border-green-200 bg-green-50/30" : "border-border"}`}>
-              <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/35 mb-3">
-                Acompte — Réservation
-              </p>
-              <p className="font-serif text-3xl mb-2">{deposit?.toLocaleString("fr-FR")} €</p>
-              <p className="text-foreground/45 text-[13px] mb-6">50% du montant total — dû à la confirmation</p>
-              {brief.deposit_paid ? (
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-green-600">✓ Payé</span>
-              ) : (
-                <button className="w-full py-4 bg-foreground text-background font-mono text-[10px] uppercase tracking-[0.25em] hover:bg-accent transition-colors">
-                  Payer l'acompte
-                </button>
-              )}
-            </div>
-
-            {/* Solde */}
-            <div className={`border p-8 ${brief.final_paid ? "border-green-200 bg-green-50/30" : "border-border opacity-60"}`}>
-              <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/35 mb-3">
-                Solde — Après livraison
-              </p>
-              <p className="font-serif text-3xl mb-2">{final?.toLocaleString("fr-FR")} €</p>
-              <p className="text-foreground/45 text-[13px] mb-6">50% restant — dû après confirmation des photos</p>
-              {brief.final_paid ? (
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-green-600">✓ Payé</span>
-              ) : brief.deposit_paid ? (
-                <button className="w-full py-4 bg-foreground text-background font-mono text-[10px] uppercase tracking-[0.25em] hover:bg-accent transition-colors">
-                  Payer le solde
-                </button>
-              ) : (
-                <p className="font-mono text-[10px] text-foreground/30 uppercase tracking-[0.2em]">
-                  Disponible après l'acompte
+          {/* Statut paiement */}
+          <div className={`border p-8 ${isPaid ? "border-green-200 bg-green-50/20" : isDisputed ? "border-red-200 bg-red-50/20" : "border-border"}`}>
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/35 mb-3">
+                  Total mission
                 </p>
-              )}
+                <p className="font-serif text-5xl">{brief.total_amount.toLocaleString("fr-FR")} €</p>
+              </div>
+              <div className="text-right">
+                {isPaid && !isReleased && (
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber-600 border border-amber-200 bg-amber-50 px-3 py-1.5 block">
+                    En attente de validation
+                  </span>
+                )}
+                {isReleased && (
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-green-600 border border-green-200 bg-green-50 px-3 py-1.5 block">
+                    ✓ Mission validée
+                  </span>
+                )}
+                {isDisputed && (
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-red-500 border border-red-200 bg-red-50 px-3 py-1.5 block">
+                    Litige en cours
+                  </span>
+                )}
+              </div>
             </div>
+
+            {/* Explication escrow */}
+            {isPaid && !isReleased && !isDisputed && (
+              <div className="bg-surface border border-border p-5 mb-6">
+                <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/35 mb-2">Comment ça marche</p>
+                <p className="text-[13px] text-foreground/60 leading-relaxed">
+                  Votre paiement est sécurisé chez Voltra. Il sera libéré au photographe uniquement après votre confirmation de satisfaction — comme Vinted.
+                </p>
+              </div>
+            )}
+
+            {!isPaid && !isDisputed && (
+              <>
+                <p className="text-foreground/50 text-[14px] mb-6 leading-relaxed">
+                  Votre paiement est sécurisé chez Voltra jusqu'à votre confirmation. 
+                  Le photographe ne sera payé qu'après votre validation.
+                </p>
+                <button onClick={handlePayment} disabled={paying}
+                  className="w-full py-5 bg-foreground text-background font-mono text-[10px] uppercase tracking-[0.3em] hover:bg-accent transition-colors disabled:opacity-40">
+                  {paying ? "Redirection vers Stripe…" : `Payer ${brief.total_amount.toLocaleString("fr-FR")} € en sécurité`}
+                </button>
+              </>
+            )}
           </div>
 
-          <div className="border border-border p-6 flex justify-between items-center">
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">Total mission</span>
-            <span className="font-serif text-2xl">{brief.total_amount.toLocaleString("fr-FR")} €</span>
-          </div>
+          {/* Bouton signaler problème */}
+          {isPaid && !isReleased && !isDisputed && brief.status === "completed" && (
+            <div className="border border-border p-6">
+              {!showDispute ? (
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 mb-1">Un problème ?</p>
+                    <p className="text-[13px] text-foreground/50">Les photos ne correspondent pas à vos attentes ?</p>
+                  </div>
+                  <button onClick={() => setShowDispute(true)}
+                    className="px-5 py-2.5 border border-red-200 text-red-500 font-mono text-[9px] uppercase tracking-[0.2em] hover:bg-red-50 transition-colors flex-shrink-0">
+                    Signaler un problème
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-red-500 mb-3">Décrire le problème</p>
+                  <textarea value={disputeReason} onChange={(e) => setDisputeReason(e.target.value)}
+                    placeholder="Expliquez précisément le problème rencontré avec les photos livrées…"
+                    rows={4}
+                    className="w-full bg-transparent border border-border focus:border-red-300 outline-none p-3 text-[14px] resize-none transition-colors" />
+                  <div className="flex gap-3">
+                    <button onClick={submitDispute} disabled={submittingDispute}
+                      className="flex-1 py-3 bg-red-500 text-white font-mono text-[9px] uppercase tracking-[0.2em] hover:bg-red-600 transition-colors disabled:opacity-40">
+                      {submittingDispute ? "Envoi…" : "Soumettre le litige"}
+                    </button>
+                    <button onClick={() => setShowDispute(false)}
+                      className="px-5 py-3 border border-border font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40 hover:text-foreground transition-colors">
+                      Annuler
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {isDisputed && brief.dispute_reason && (
+            <div className="border border-red-200 bg-red-50/20 p-6">
+              <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-red-500 mb-3">Litige signalé</p>
+              <p className="text-[14px] text-foreground/60 italic">"{brief.dispute_reason}"</p>
+              <p className="font-mono text-[9px] text-foreground/35 mt-3">Notre équipe vous contacte sous 24h.</p>
+            </div>
+          )}
 
           <p className="font-mono text-[9px] text-foreground/30 text-center uppercase tracking-[0.2em]">
-            Paiement sécurisé · Stripe · Commission Voltra incluse
+            Paiement sécurisé · Stripe · Fonds bloqués jusqu'à validation
           </p>
         </>
       )}
