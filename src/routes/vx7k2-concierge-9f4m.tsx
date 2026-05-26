@@ -87,7 +87,7 @@ function AdminPage() {
 
   async function loadBriefs() {
     const { data, error } = await supabase
-      .from("inquiries")
+      .from("briefs")
       .select("*")
       .order("created_at", { ascending: false });
     if (error) { toast.error(error.message); return; }
@@ -102,7 +102,7 @@ function AdminPage() {
   }
 
   async function updateStatus(id: string, status: string) {
-    const { error } = await supabase.from("inquiries").update({ status }).eq("id", id);
+    const { error } = await supabase.from("briefs").update({ status }).eq("id", id);
     if (error) { toast.error(error.message); return; }
     toast.success("Statut mis à jour");
     loadBriefs();
