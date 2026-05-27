@@ -47,17 +47,10 @@ export function Nav() {
           animate={{ opacity: 1 }}
           className="fixed inset-0 z-40 bg-[#F5F0E8] flex flex-col items-center justify-center gap-8 md:hidden"
         >
-          {[
-            { label: "La Methode", href: "/#methode" },
-            { label: "Temoignages", href: "/#voix" },
-            { label: "FAQ", href: "/#faq" },
-            { label: "Mon espace", href: "/mon-espace" },
-          ].map((l) => (
-            <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
-              className="font-serif text-3xl italic text-foreground hover:text-accent transition-colors duration-300">
-              {l.label}
-            </a>
-          ))}
+          <a href="/#methode" onClick={() => setMenuOpen(false)} className="font-serif text-3xl italic text-foreground hover:text-accent transition-colors duration-300">La Methode</a>
+          <a href="/#voix" onClick={() => setMenuOpen(false)} className="font-serif text-3xl italic text-foreground hover:text-accent transition-colors duration-300">Temoignages</a>
+          <a href="/#faq" onClick={() => setMenuOpen(false)} className="font-sans text-3xl text-foreground hover:text-accent transition-colors duration-300">FAQ</a>
+          <a href="/mon-espace" onClick={() => setMenuOpen(false)} className="font-serif text-3xl italic text-foreground hover:text-accent transition-colors duration-300">Mon espace</a>
           <Link to="/inquiry" onClick={() => setMenuOpen(false)}
             className="mt-4 px-8 py-4 bg-foreground text-background font-mono text-[10px] uppercase tracking-[0.25em] font-bold">
             Immortaliser ce moment
