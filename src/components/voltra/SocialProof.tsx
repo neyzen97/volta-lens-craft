@@ -4,7 +4,7 @@ const stats = [
   { valeur: "200+", label: "Missions realisees" },
   { valeur: "98%", label: "Clients satisfaits" },
   { valeur: "48h", label: "Delai de reponse" },
-  { valeur: "15+", label: "Villes couvertes" },
+  { valeur: "+100", label: "Villes couvertes" },
 ];
 
 const medias = [
@@ -19,12 +19,12 @@ const medias = [
 ];
 
 const photos = [
-  "https://images.unsplash.com/photo-1529636798458-92182e662485?w=600&q=80&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1495121553079-4c61bcce1894?w=600&q=80&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&q=80&auto=format&fit=crop",
 ];
 
 export function SocialProof() {
