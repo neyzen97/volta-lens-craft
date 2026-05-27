@@ -52,7 +52,7 @@ export function Process() {
           className="mt-12 text-center"
         >
           <Link to="/inquiry" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/35 hover:text-accent transition-colors duration-500">
-            Commencer maintenant <span className="text-accent">→</span>
+            Immortaliser ce moment <span className="text-accent">→</span>
           </Link>
         </motion.div>
       </div>
