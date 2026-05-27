@@ -24,7 +24,6 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--background);
   --color-destructive: oklch(0.65 0.22 25);
-  --color-destructive-foreground: var(--foreground);
   --color-border: var(--border);
   --color-input: var(--border);
   --color-ring: var(--accent);
@@ -36,19 +35,22 @@
 }
 
 :root {
-  --background: #F8F6F1;
-  --foreground: #1A1814;
-  --surface: #F0ECE3;
-  --card: #F0ECE3;
-  --card-foreground: #1A1814;
-  --popover: #F0ECE3;
-  --popover-foreground: #1A1814;
+  /* Base blanche premium */
+  --background: #FAFAF8;
+  --foreground: #0D0C0A;
+  --surface: #F2EFE8;
+  --dark: #0D0C0A;
+  --dark-soft: #1A1814;
+  --card: #F2EFE8;
+  --card-foreground: #0D0C0A;
+  --popover: #F2EFE8;
+  --popover-foreground: #0D0C0A;
   --accent: #B8923A;
-  --accent-soft: rgba(184, 146, 58, 0.10);
+  --accent-soft: rgba(184, 146, 58, 0.12);
   --sage: #5C7A5E;
-  --sage-soft: rgba(92, 122, 94, 0.10);
-  --muted-foreground: rgba(26, 24, 20, 0.45);
-  --border: rgba(26, 24, 20, 0.08);
+  --muted-foreground: rgba(13, 12, 10, 0.45);
+  --border: rgba(13, 12, 10, 0.08);
+  --trustpilot: #00B67A;
 }
 
 @layer base {
@@ -62,7 +64,7 @@
     text-rendering: optimizeLegibility;
   }
   body { overflow-x: hidden; }
-  ::selection { background: var(--accent); color: #F8F6F1; }
+  ::selection { background: var(--accent); color: #FAFAF8; }
 }
 
 @layer utilities {
@@ -76,16 +78,18 @@
   .bg-surface { background-color: var(--surface); }
   .text-sage { color: var(--sage); }
   .bg-sage { background-color: var(--sage); }
+  .bg-dark { background-color: var(--dark); }
+  .text-trustpilot { color: var(--trustpilot); }
 }
 
-/* Grain subtil — texture photographique */
+/* Grain */
 .grain::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 999;
-  opacity: 0.018;
+  opacity: 0.015;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
@@ -99,10 +103,6 @@
   from { opacity: 1; transform: scale(1) rotate(0deg); }
   to { opacity: 0; transform: scale(2.6) rotate(45deg); pointer-events: none; }
 }
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(28px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 @keyframes ken-burns {
   from { transform: scale(1.04); }
   to { transform: scale(1.15); }
@@ -111,8 +111,12 @@
   from { transform: scaleY(0); transform-origin: top; }
   to { transform: scaleY(1); transform-origin: top; }
 }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .animate-aperture { animation: aperture-open 2.2s var(--ease-cinematic) both; }
 .animate-blades { animation: aperture-blades 1.4s var(--ease-cinematic) 0.3s both; }
-.animate-fade-up { animation: fade-up 1.2s var(--ease-out-expo) both; }
 .animate-ken-burns { animation: ken-burns 22s ease-out both infinite alternate; }
+.animate-fade-up { animation: fade-up 1.2s var(--ease-out-expo) both; }
