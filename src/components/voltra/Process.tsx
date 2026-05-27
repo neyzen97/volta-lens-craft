@@ -1,82 +1,57 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 
-const etapes = [
-  {
-    n: "01",
-    emoji: "✍️",
-    title: "Vous décrivez.",
-    body: "5 minutes. Votre événement, l'ambiance souhaitée, votre budget. Pas de jargon, juste votre vision.",
-  },
-  {
-    n: "02",
-    emoji: "🎯",
-    title: "Nous sélectionnons.",
-    body: "Nos directeurs artistiques analysent votre brief et identifient le photographe fait pour vous. Un seul. Le bon.",
-  },
-  {
-    n: "03",
-    emoji: "✨",
-    title: "Vous vivez.",
-    body: "Sous 48h, vous recevez une proposition personnelle. Vous confirmez, vous profitez. Voltra gère le reste.",
-  },
-];
-
 export function Process() {
   return (
-    <section id="methode" className="py-28 md:py-44 px-6 md:px-10 bg-[#F8F6F1]">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-20 md:mb-32 max-w-xl"
-        >
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-6 block">
-            — Comment ça marche
-          </span>
-          <h2 className="font-serif text-4xl md:text-5xl leading-[1.05] tracking-tight">
-            Simple pour vous.
-            <br />
-            <span className="italic text-foreground/45">Exigeant pour nous.</span>
-          </h2>
-        </motion.div>
-
-        {/* Étapes */}
-        <div className="grid md:grid-cols-3 gap-px bg-border">
-          {etapes.map((e, i) => (
-            <motion.div
-              key={e.n}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 1.2, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#F8F6F1] p-10 md:p-12 group hover:bg-[#F0ECE3] transition-colors duration-500"
-            >
-              <div className="flex items-center justify-between mb-8">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">{e.n}</span>
-                <span className="text-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500">{e.emoji}</span>
-              </div>
-              <h3 className="font-serif text-2xl italic mb-4 leading-tight">{e.title}</h3>
-              <p className="text-foreground/55 text-[14px] leading-relaxed">{e.body}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* CTA inline */}
+    <section id="methode" className="py-20 md:py-28 px-6 md:px-10 bg-[#FAFAF8] border-b border-border">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 text-center"
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-14"
         >
-          <Link
-            to="/inquiry"
-            className="inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 hover:text-accent transition-colors duration-500"
-          >
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-4 block">
+            Comment ca marche
+          </span>
+          <h2 className="font-serif text-3xl md:text-4xl italic">Simple. Rapide. Parfait.</h2>
+        </motion.div>
+
+        <div className="grid grid-cols-3 gap-4 md:gap-8 relative">
+          {/* Ligne de connexion */}
+          <div className="absolute top-8 left-[16.66%] right-[16.66%] h-[1px] bg-border hidden md:block" />
+
+          {[
+            { n: "01", icon: "✍️", label: "Vous decrivez", desc: "5 minutes" },
+            { n: "02", icon: "🎯", label: "Nos experts selectionnent", desc: "Sous 48h" },
+            { n: "03", icon: "📸", label: "Vous vivez pleinement", desc: "Le resultat parfait" },
+          ].map((e, i) => (
+            <motion.div
+              key={e.n}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col items-center text-center relative z-10"
+            >
+              <div className="w-16 h-16 rounded-full bg-[#FAFAF8] border border-border flex items-center justify-center mb-4 text-2xl">
+                {e.icon}
+              </div>
+              <p className="font-serif text-base md:text-lg italic mb-1">{e.label}</p>
+              <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-accent">{e.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="mt-12 text-center"
+        >
+          <Link to="/inquiry" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/35 hover:text-accent transition-colors duration-500">
             Commencer maintenant <span className="text-accent">→</span>
           </Link>
         </motion.div>
