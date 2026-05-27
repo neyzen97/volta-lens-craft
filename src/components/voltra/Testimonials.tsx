@@ -1,30 +1,15 @@
 import { motion } from "motion/react";
 
+const t1corps = "J'avais regarde des centaines de portfolios pendant des semaines. Un ami m'a parle de Voltra. J'ai rempli le formulaire un soir. Deux jours apres, ils m'ont envoye un profil. Les photos de notre mariage sont au-dessus de tout ce qu'on esperait. Merci beaucoup !";
+const t2corps = "Je pensais que c'etait un truc marketing de plus. On organise des tournois de padel depuis 5 ans, on a toujours galere avec les photographes. La c'etait fluide du debut a la fin. Le photographe connaissait le sport, comprenait les angles. On a des images qu'on utilise encore partout.";
+const t3corps = "Notre campagne printemps devait etre tournee en trois semaines. Je n'avais pas le temps de chercher. J'ai envoye mon brief un lundi matin. Le mardi apres-midi j'avais une proposition avec un photographe dont le travail m'a coupe le souffle. C'est rare de tomber juste aussi vite.";
+const t4corps = "Pour nos annonces immobilieres haut de gamme, la photo c'est tout. Avant Voltra on testait des gens au hasard. Maintenant on passe par eux systematiquement. Le processus est court, les resultats sont constants. C'est devenu un reflexe.";
+
 const temoignages = [
-  {
-    corps: "J avais regarde des centaines de portfolios pendant des semaines. Un ami m a parle de Voltra. J ai rempli le formulaire un soir. Deux jours apres, ils m ont envoye un profil. C etait exactement ce que je cherchais. Les photos de notre mariage sont au-dessus de tout ce qu on esperait.",
-    nom: "Camille & Romain D.",
-    meta: "Mariage · Aix-en-Provence, Septembre 2024",
-    initiale: "C",
-  },
-  {
-    corps: "Je pensais que c etait un truc marketing de plus. On organise des tournois de padel depuis 5 ans, on a toujours galere avec les photographes. La c etait fluide du debut a la fin. Le photographe connaissait le sport, comprenait les angles. On a des images qu on utilise encore partout.",
-    nom: "Mehdi L.",
-    meta: "Directeur sportif · Open de Padel Paris, Juin 2024",
-    initiale: "M",
-  },
-  {
-    corps: "Notre campagne printemps devait etre tournee en trois semaines. Je n avais pas le temps de chercher. J ai envoye mon brief un lundi matin. Le mardi apres-midi j avais une proposition avec un photographe dont le travail m a coupe le souffle. C est rare de tomber juste aussi vite.",
-    nom: "Lea T.",
-    meta: "Directrice de creation · Maison Eclat, Paris",
-    initiale: "L",
-  },
-  {
-    corps: "Pour nos annonces immobilieres haut de gamme, la photo c est tout. Avant Voltra on testait des gens au hasard, c etait aleatoire. Maintenant on passe par eux systematiquement. Le processus est court, les resultats sont constants. C est devenu un reflexe.",
-    nom: "Alexandre B.",
-    meta: "Agent immobilier de prestige · 7eme arrondissement, Paris",
-    initiale: "A",
-  },
+  { corps: t1corps, nom: "Camille & Romain D.", meta: "Mariage - Aix-en-Provence, Septembre 2024", initiale: "C" },
+  { corps: t2corps, nom: "Mehdi L.", meta: "Directeur sportif - Open de Padel Paris, Juin 2024", initiale: "M" },
+  { corps: t3corps, nom: "Lea T.", meta: "Directrice de creation - Maison Eclat, Paris", initiale: "L" },
+  { corps: t4corps, nom: "Alexandre B.", meta: "Agent immobilier - 7eme arrondissement, Paris", initiale: "A" },
 ];
 
 export function Testimonials() {
@@ -34,7 +19,7 @@ export function Testimonials() {
         <div className="mb-20 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-5 block">
-              Ce qu ils en disent
+              Ce qu'ils en disent
             </span>
             <h2 className="font-serif text-4xl md:text-5xl leading-[1.05] tracking-tight">
               Ils ont fait confiance
