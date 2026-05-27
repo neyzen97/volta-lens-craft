@@ -78,7 +78,7 @@ export function Benefits() {
               Pret a immortaliser votre moment ?
             </p>
             <a href="/inquiry" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-accent hover:gap-4 transition-all duration-500">
-              Commencer <span>→</span>
+              Immortaliser ce moment <span>→</span>
             </a>
           </motion.div>
         </div>
