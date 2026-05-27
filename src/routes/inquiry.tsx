@@ -299,9 +299,14 @@ function InquiryPage() {
           </button>
         </div>
 
-        <p className="mt-8 text-center font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/25">
-          Gratuit · Sans engagement · Reponse sous 48h
-        </p>
+        <div className="mt-8 text-center space-y-3">
+          <p className="font-sans text-[13px] text-foreground/40 max-w-sm mx-auto leading-relaxed italic">
+            Si notre selection ne vous convient pas, nous en proposons une nouvelle sous 24h. Gratuitement.
+          </p>
+          <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/25">
+            Gratuit · Sans engagement · Reponse sous 48h
+          </p>
+        </div>
       </section>
 
       <SiteFooter />
