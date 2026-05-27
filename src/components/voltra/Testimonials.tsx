@@ -2,27 +2,27 @@ import { motion } from "motion/react";
 
 const temoignages = [
   {
-    corps: "J'avais regardé des centaines de portfolios pendant des semaines. Un ami m'a parlé de Voltra. J'ai rempli le formulaire un soir. Deux jours après, ils m'ont envoyé un profil. C'était exactement ce que je cherchais sans savoir vraiment le formuler. Les photos de notre mariage sont au-dessus de tout ce qu'on espérait. Merci beaucoup !",
+    corps: "J avais regarde des centaines de portfolios pendant des semaines. Un ami m a parle de Voltra. J ai rempli le formulaire un soir. Deux jours apres, ils m ont envoye un profil. C etait exactement ce que je cherchais. Les photos de notre mariage sont au-dessus de tout ce qu on esperait.",
     nom: "Camille & Romain D.",
     meta: "Mariage · Aix-en-Provence, Septembre 2024",
     initiale: "C",
   },
   {
-    corps: "Honnêtement je pensais que c'était un truc marketing de plus. On organise des tournois de padel depuis 5 ans, on a toujours galéré avec les photographes, soit trop chers, soit les photos sont décevantes. Là c'était fluide du début à la fin. Le photographe connaissait le sport, comprenait les angles. On a des images qu'on utilise encore partout.",
+    corps: "Je pensais que c etait un truc marketing de plus. On organise des tournois de padel depuis 5 ans, on a toujours galere avec les photographes. La c etait fluide du debut a la fin. Le photographe connaissait le sport, comprenait les angles. On a des images qu on utilise encore partout.",
     nom: "Mehdi L.",
     meta: "Directeur sportif · Open de Padel Paris, Juin 2024",
     initiale: "M",
   },
   {
-    corps: "Notre campagne printemps devait être tournée en trois semaines. Je n'avais pas le temps de chercher. J'ai envoyé mon brief un lundi matin. Le mardi après-midi j'avais une proposition avec un photographe que je ne connaissais pas mais dont le travail m'a coupé le souffle. C'est rare de tomber juste aussi vite.",
-    nom: "Léa T.",
-    meta: "Directrice de création · Maison Éclat, Paris",
+    corps: "Notre campagne printemps devait etre tournee en trois semaines. Je n avais pas le temps de chercher. J ai envoye mon brief un lundi matin. Le mardi apres-midi j avais une proposition avec un photographe dont le travail m a coupe le souffle. C est rare de tomber juste aussi vite.",
+    nom: "Lea T.",
+    meta: "Directrice de creation · Maison Eclat, Paris",
     initiale: "L",
   },
   {
-    corps: "Pour nos annonces immobilières haut de gamme, la photo c'est tout. Avant Voltra on testait des gens au hasard, c'était aléatoire. Maintenant on passe par eux systématiquement. Le processus est court, les résultats sont constants. C'est devenu un réflexe. Je recommande !",
+    corps: "Pour nos annonces immobilieres haut de gamme, la photo c est tout. Avant Voltra on testait des gens au hasard, c etait aleatoire. Maintenant on passe par eux systematiquement. Le processus est court, les resultats sont constants. C est devenu un reflexe.",
     nom: "Alexandre B.",
-    meta: "Agent immobilier de prestige · 7ème arrondissement, Paris",
+    meta: "Agent immobilier de prestige · 7eme arrondissement, Paris",
     initiale: "A",
   },
 ];
@@ -34,17 +34,17 @@ export function Testimonials() {
         <div className="mb-20 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent mb-5 block">
-              — Ce qu'ils en disent
+              Ce qu ils en disent
             </span>
             <h2 className="font-serif text-4xl md:text-5xl leading-[1.05] tracking-tight">
               Ils ont fait confiance
               <br />
-              <span className="italic text-foreground/45">à Voltra.</span>
+              <span className="italic text-foreground/45">a Voltra.</span>
             </h2>
           </div>
           <p className="text-foreground/35 text-[11px] font-mono uppercase tracking-[0.2em] max-w-xs text-right hidden md:block leading-relaxed">
             +200 missions
-            <br />réalisées en 2024
+            <br />realisees en 2024
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export function Testimonials() {
                 </div>
               </div>
               <blockquote className="font-sans text-[15px] leading-[1.75] text-foreground/65 italic">
-                "{t.corps}"
+                {t.corps}
               </blockquote>
             </motion.figure>
           ))}
