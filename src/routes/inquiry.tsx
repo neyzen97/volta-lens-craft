@@ -54,7 +54,16 @@ const OCCASION_GUESTS: Record<string, string> = {
 const NO_GUESTS = ["Shooting", "Immobilier"];
 
 const STYLES = ["Cinematique", "Editorial", "Documentaire", "Beaux-arts", "Reportage"];
-const BUDGETS = ["Moins de 1 000", "1 000 - 5 000", "5 000 - 10 000", "10 000 - 20 000", "20 000 +"];
+const BUDGETS_BY_OCCASION: Record<string, string[]> = {
+  Mariage: ["500 - 1 000", "1 000 - 3 000", "3 000 - 6 000", "6 000 - 10 000", "+10 000"],
+  Shooting: ["100 - 300", "300 - 700", "700 - 1 500", "1 500 - 3 000", "+3 000"],
+  Sport: ["150 - 400", "400 - 1 000", "1 000 - 3 000", "3 000 - 10 000", "+10 000"],
+  Immobilier: ["150 - 300", "300 - 700", "700 - 1 500", "1 500 - 5 000", "+5 000"],
+  Corporate: ["300 - 700", "700 - 2 000", "2 000 - 5 000", "5 000 - 10 000", "+10 000"],
+  Evenement: ["200 - 500", "500 - 1 500", "1 500 - 4 000", "4 000 - 10 000", "+10 000"],
+  Autre: ["Moins de 1 000", "1 000 - 3 000", "3 000 - 7 000", "7 000 - 15 000", "+15 000"],
+};
+const DEFAULT_BUDGETS = ["Moins de 1 000", "1 000 - 3 000", "3 000 - 7 000", "7 000 - 15 000", "+15 000"];
 
 const ETAPES = [
   { k: "occasion", label: "L'Occasion" },
@@ -228,7 +237,7 @@ function InquiryPage() {
             {step === 2 && (
               <Etape label="Le Contexte" titre="Budget et envergure." indice="Une fourchette indicative nous aide a trouver le bon photographe.">
                 <div className="space-y-10">
-                  <GroupeChoix label="Budget (en euros)" options={BUDGETS} value={form.budget || ""} onChange={(v) => update("budget", v)} />
+                  <GroupeChoix label="Budget (en euros)" options={BUDGETS_BY_OCCASION[form.occasion] || DEFAULT_BUDGETS} value={form.budget || ""} onChange={(v) => update("budget", v)} />
                   {showGuests && (
                     <Champ label={guestLabel} placeholder="Ex: 80 personnes" value={form.guests || ""} onChange={(v) => update("guests", v)} />
                   )}
