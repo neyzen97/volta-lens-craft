@@ -8,7 +8,7 @@ const temoignages = [
     initiale: "C",
   },
   {
-    corps: "Honnêtement je pensais que c'était un truc marketing de plus. On organise des tournois de padel depuis 5 ans, on a toujours galéré avec les photographes, soit trop chers, soit les photos sont décevantes. Là c'était fluide du début à la fin. Le photographe connaissait le sport, comprenait les angles. On a des images qu'on utilise encore partout. ",
+    corps: "Honnêtement je pensais que c'était un truc marketing de plus. On organise des tournois de padel depuis 5 ans, on a toujours galéré avec les photographes, soit trop chers, soit les photos sont décevantes. Là c'était fluide du début à la fin. Le photographe connaissait le sport, comprenait les angles. On a des images qu'on utilise encore partout.",
     nom: "Mehdi L.",
     meta: "Directeur sportif — Open de Padel Paris, Juin 2024",
     initiale: "M",
