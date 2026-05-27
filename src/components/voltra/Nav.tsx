@@ -22,7 +22,7 @@ export function Nav() {
         <div className="hidden md:flex gap-10 text-[10px] font-mono uppercase tracking-[0.25em] text-foreground/40">
           <a href="/#methode" className="hover:text-accent transition-colors duration-500">La Methode</a>
           <a href="/#voix" className="hover:text-accent transition-colors duration-500">Temoignages</a>
-          <a href="/#faq" className="hover:text-accent transition-colors duration-500">FAQ</a>
+          <a href="/#faq" className="font-sans hover:text-accent transition-colors duration-500">FAQ</a>
           <Link to="/mon-espace" className="hover:text-accent transition-colors duration-500">Mon espace</Link>
         </div>
 
