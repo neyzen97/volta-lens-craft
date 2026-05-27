@@ -75,7 +75,7 @@ export function Benefits() {
             className="bg-[#0D0C0A] p-8 md:p-10 flex flex-col justify-between"
           >
             <p className="font-serif text-2xl italic text-white/80 leading-snug mb-8">
-              Pret a confier votre moment aux meilleurs ?
+              Pret a immortaliser votre moment ?
             </p>
             <a href="/inquiry" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-accent hover:gap-4 transition-all duration-500">
               Commencer <span>→</span>
