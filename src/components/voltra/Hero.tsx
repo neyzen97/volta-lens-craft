@@ -27,25 +27,7 @@ export function Hero() {
       {/* Contenu */}
       <div className="relative z-30 text-center px-6 max-w-4xl w-full">
 
-        {/* Trustpilot */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-3 px-4 py-2.5 border border-foreground/10 bg-white/60 backdrop-blur-sm mb-10"
-        >
-          <div className="flex items-center gap-0.5">
-            {[...Array(5)].map((_, i) => (
-              <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#00B67A">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            ))}
-          </div>
-          <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/50">
-            4,8/5 · 500+ avis
-          </span>
-          <span className="font-sans text-[10px] font-bold" style={{ color: "#00B67A" }}>Trustpilot</span>
-        </motion.div>
+
 
         {/* Titre */}
         <motion.h1
