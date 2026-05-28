@@ -13,7 +13,7 @@ const APRES = [
   "Une seule proposition, parfaitement adaptée",
   "La certitude d'un choix expert",
   "La sérénité du jour J",
-  "Un concierge disponible de A à Z",
+  "Un Expert Voltra disponible de A à Z",
 ];
 
 export function AvantApres() {
