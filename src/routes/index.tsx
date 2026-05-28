@@ -2,10 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/voltra/Nav";
 import { Hero } from "@/components/voltra/Hero";
 import { PhotoStrip } from "@/components/voltra/PhotoStrip";
-import { MediaLogos } from "@/components/voltra/MediaLogos";
 import { Process } from "@/components/voltra/Process";
-import { Benefits } from "@/components/voltra/Benefits";
-import { SocialProof } from "@/components/voltra/SocialProof";
 import { AvantApres } from "@/components/voltra/AvantApres";
 import { Testimonials } from "@/components/voltra/Testimonials";
 import { FAQ } from "@/components/voltra/FAQ";
@@ -24,10 +21,7 @@ function Landing() {
       <Nav />
       <Hero />
       <PhotoStrip />
-      <MediaLogos />
       <Process />
-      <Benefits />
-      <SocialProof />
       <AvantApres />
       <Testimonials />
       <FAQ />
